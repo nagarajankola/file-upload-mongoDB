@@ -30,7 +30,7 @@ router.post(
       inStock: req.body.inStock,
       product_description: req.body.description,
       product_image: {
-        image: req.file.buffer,
+        image: req.file.buffer.toString('base64'),
         contentType: req.file.mimetype,
       },
     });

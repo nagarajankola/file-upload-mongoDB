@@ -19,7 +19,7 @@ const categoriesSchema = new mongoose.Schema({
     },
     product_description: reqString,
     product_image:{
-        image:Buffer,
+        image:String,
         contentType: String
     }
 },{
