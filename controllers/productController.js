@@ -1,5 +1,4 @@
-const Products = require("../models/cetagories");
-
+const Product = require("../models/productSchema");
 
 exports.getAllProducts = async (req, res) => {
   try {
@@ -17,4 +16,21 @@ exports.getAllProducts = async (req, res) => {
   }
 };
 
-
+exports.addProduct = async (req, res) => {
+  try {
+    console.log(req.body);
+    const newProduct = new Product(req.body);
+    const response = await newProduct.save();
+    res.status(200).json({
+      status: "success",
+      data: {
+        product: newProduct,
+      },
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "fail",
+      message: error,
+    });
+  }
+};
