@@ -3,7 +3,8 @@ const router = express.Router();
 const multer = require("multer");
 
 const productController = require("../controllers/productController");
-const Categories = require('../models/cetagories');
+const Product = require('../models/cetagories');
+
 const upload = multer({
   limits: {
     fieldSize: 100000000,
@@ -14,21 +15,22 @@ const upload = multer({
     cb(undefined, true);
   },
 });
+
 router
   .get("/", productController.getAllProducts)
   .post("/", upload.single("upload"), async (req, res) => {
     try {
       // console.log(req.body.name);
       // console.log(req.file);
-      const saveTO = new Categories({
+      const saveTO = new Product({
         product_name: req.body.name,
         product_price: req.body.price,
         inStock: req.body.inStock,
         product_description: req.body.description,
-        product_image: {
-          image: req.file.buffer.toString("base64"),
-          contentType: req.file.mimetype,
-        },
+        // product_image: {
+        //   image: req.file.buffer.toString("base64"),
+        //   contentType: req.file.mimetype,
+        // },
       });
       const responseTO = await saveTO.save();
       res.send("Product added");

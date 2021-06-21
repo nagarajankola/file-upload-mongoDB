@@ -10,7 +10,7 @@ const reqNumber = {
     required: true
 };
 
-const categoriesSchema = new mongoose.Schema({
+const productSchema = new mongoose.Schema({
     product_name: reqString,
     product_price: reqNumber,
     inStock: {
@@ -18,14 +18,14 @@ const categoriesSchema = new mongoose.Schema({
         default: true
     },
     product_description: reqString,
-    product_image:{
-        image:String,
-        contentType: String
-    }
+    // product_image:{
+    //     image:String,
+    //     contentType: String
+    // }
 },{
-    collection:"imageUpload"
+    collection:"products"
 })
 
-const Categories = mongoose.model("categories", categoriesSchema);
+const Product = mongoose.model("product", productSchema);
 
-module.exports = Categories;
+module.exports = Product;
