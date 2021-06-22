@@ -9,8 +9,7 @@ exports.getAllProducts = async (req, res) => {
       .filter()
       .sort()
       .limitFields()
-      .paginate()
-      .getCartItems();
+      .paginate();
 
     const products = await features.query;
     res.status(200).json({
@@ -31,11 +30,9 @@ exports.getAllProducts = async (req, res) => {
 // Controller to add a new product
 exports.addProduct = async (req, res) => {
   try {
-    console.log(req.body);
     const newProduct = new Product(req.body);
-
     const response = await newProduct.save();
-    res.status(200).json({
+    res.status(201).json({
       status: "success",
       data: {
         product: newProduct,
@@ -49,8 +46,8 @@ exports.addProduct = async (req, res) => {
   }
 };
 
-// Get Cart Items
 
+// Get Cart Items
 exports.getCartItems = async (req, res) => {
   try {
     const IDs = req.query.id.split(",");
@@ -68,8 +65,65 @@ exports.getCartItems = async (req, res) => {
   }
 };
 
-// const multer = require("multer");
 
+// Get single item
+exports.getSingleProduct = async(req, res) =>{
+  try {
+    const product = await Product.findById(req.params.id);
+    
+    res.status(200).send({ 
+      status: 'success',
+      result: product.length,
+      data: product
+    })
+    // const product = await Product.findById()
+  } catch (error) {
+    res.status(404).json({
+      status: "fail",
+      message: error
+    })
+  }
+}
+
+// Update product
+exports.updateProduct = async (req, res) => {
+  try {
+    const product = await Product.findByIdAndUpdate(req.params.id, req.body,{
+      new:true,
+      runValidators: true
+    })
+
+    res.status(202).json({
+      status: 'success',
+      data: product,
+    })
+  } catch (error) {
+    res.status(404).json({
+      status: "fail",
+      message: error
+    })
+  }
+}
+
+// Delete product
+exports.deleteProduct = async (req, res) => {
+  try {
+    const deleteProduct = await Product.findByIdAndDelete(req.params.id);
+    res.status(204).send({
+      status: "success",
+    })
+  } catch (error) {
+    res.status(404).json({
+      status: "fail",
+      message: error
+    })
+  }
+}
+
+// 
+// 
+// 
+// const multer = require("multer");
 // exports.upload = multer({
 //   limits: {
 //     fieldSize: 100000000,

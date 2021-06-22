@@ -4,16 +4,16 @@ const productSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: true,
+      required: (true, "A product must have a name"),
       trim: true,
     },
     originalPrice: {
       type: Number,
-      required: true,
+      required: (true, "A product must have originalPrice"),
     },
-    discountedPrice: {
+    originalPrice: {
       type: Number,
-      required: true,
+      required: (true, "A product must have originalPrice"),
     },
     inStock: {
       type: Boolean,
@@ -21,17 +21,17 @@ const productSchema = new mongoose.Schema(
     },
     description: {
       type: String,
-      required: true,
+      required: (true, "A product must have description"),
       trim: true,
     },
     size: {
       type: String,
-      required: true,
+      required: (true, "A product must have size"),
       trim: true,
     },
     color: {
       type: String,
-      required: true,
+      required: (true, "A product must have color"),
       trim: true,
     },
     brand: {
@@ -40,23 +40,23 @@ const productSchema = new mongoose.Schema(
     },
     occasion: {
       type: String,
-      required: true,
+      required: (true, "A product must have occasion"),
       trim: true,
     },
     season: {
       type: String,
-      required: true,
+      required: (true, "A product must have season"),
       trim: true,
     },
     // product_image:{
     //     image:String,
     //     contentType: String
     // },
-    category:{
+    category: {
       type: String,
-      required: true,
+      required: (true, "A product must have category"),
       trim: true,
-    }
+    },
   },
   {
     collection: "products",
