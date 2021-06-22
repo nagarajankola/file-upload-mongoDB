@@ -6,6 +6,7 @@ const productController = require("../controllers/productController");
 // http://localhost:4000/api/v1/products
 router
   .get("/", productController.getAllProducts)
+  .get("/cartItems",productController.getCartItems)
   .post("/", productController.addProduct)
 
   module.exports = router;

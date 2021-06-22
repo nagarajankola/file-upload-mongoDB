@@ -5,7 +5,12 @@ const APIfeatures = require("../utils/apiFeatures");
 exports.getAllProducts = async (req, res) => {
   try {
     // const products = await Products.find({});
-    const features = new APIfeatures(Product.find(),req.query).filter().sort().limitFields().paginate();
+    const features = new APIfeatures(Product.find(), req.query)
+      .filter()
+      .sort()
+      .limitFields()
+      .paginate()
+      .getCartItems();
 
     const products = await features.query;
     res.status(200).json({
@@ -16,7 +21,7 @@ exports.getAllProducts = async (req, res) => {
   } catch (error) {
     res.status(400).json({
       status: "fail",
-      
+
       message: error,
     });
     console.log(error);
@@ -35,6 +40,25 @@ exports.addProduct = async (req, res) => {
       data: {
         product: newProduct,
       },
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "fail",
+      message: error,
+    });
+  }
+};
+
+// Get Cart Items
+
+exports.getCartItems = async (req, res) => {
+  try {
+    const IDs = req.query.id.split(",");
+    const cartItems = await Product.find({ _id: { $in: IDs } });
+    res.status(200).send({
+      status: "success",
+      result: cartItems.length,
+      data:cartItems
     });
   } catch (error) {
     res.status(400).json({
