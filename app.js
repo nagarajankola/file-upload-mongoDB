@@ -8,12 +8,13 @@ if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 
+// Middleware
 app.use(express.json());
 
-// app.use(require('./routes/productRoute'));
+// Routes
 app.use("/api/v1/products", productRouter);
 
-
+// Default route for reference
 app.get("/", (req, res) => {
   res.send("Hola!");
 });

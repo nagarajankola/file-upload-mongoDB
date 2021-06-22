@@ -48,10 +48,10 @@ const productSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
-    product_image:{
-        image:String,
-        contentType: String
-    },
+    // product_image:{
+    //     image:String,
+    //     contentType: String
+    // },
     category:{
       type: String,
       required: true,

@@ -7,6 +7,7 @@ const app = require('./app');
 
 PORT=process.env.PORT;
 
+// port 
 app.listen(PORT, ()=>{
     console.log(`Server running at ${PORT}`);
 });

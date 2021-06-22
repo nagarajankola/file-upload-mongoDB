@@ -1,15 +1,16 @@
 const express = require("express");
 const router = express.Router();
 
-
 const productController = require("../controllers/productController");
 
-
-
+// http://localhost:4000/api/v1/products
 router
   .get("/", productController.getAllProducts)
   .post("/", productController.addProduct)
-  
+
+  module.exports = router;
+
+    
   
   
   // .post("/", upload.single("upload"), async (req, res) => {
@@ -38,6 +39,3 @@ router
   //   }
   // });
 
-
-
-  module.exports = router;

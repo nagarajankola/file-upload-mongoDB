@@ -1,18 +1,7 @@
 const Product = require("../models/productSchema");
 const APIfeatures = require("../utils/apiFeatures");
-// const multer = require("multer");
 
-// exports.upload = multer({
-//   limits: {
-//     fieldSize: 100000000,
-//   },
-//   fileFilter(req, file, cb) {
-//     if (!file.originalname.match(/\.(jpg|png|JPG|PNG|webp|JPEG|jpeg)$/))
-//       return cb(new Error("This is not a correct format of the file"));
-//     cb(undefined, true);
-//   },
-// });
-
+// Controller to get the products
 exports.getAllProducts = async (req, res) => {
   try {
     // const products = await Products.find({});
@@ -34,6 +23,7 @@ exports.getAllProducts = async (req, res) => {
   }
 };
 
+// Controller to add a new product
 exports.addProduct = async (req, res) => {
   try {
     console.log(req.body);
@@ -53,3 +43,16 @@ exports.addProduct = async (req, res) => {
     });
   }
 };
+
+// const multer = require("multer");
+
+// exports.upload = multer({
+//   limits: {
+//     fieldSize: 100000000,
+//   },
+//   fileFilter(req, file, cb) {
+//     if (!file.originalname.match(/\.(jpg|png|JPG|PNG|webp|JPEG|jpeg)$/))
+//       return cb(new Error("This is not a correct format of the file"));
+//     cb(undefined, true);
+//   },
+// });
