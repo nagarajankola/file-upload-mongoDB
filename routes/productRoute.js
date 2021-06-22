@@ -1,20 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const multer = require("multer");
+
 
 const productController = require("../controllers/productController");
-const Product = require('../models/productSchema');
 
-// const upload = multer({
-//   limits: {
-//     fieldSize: 100000000,
-//   },
-//   fileFilter(req, file, cb) {
-//     if (!file.originalname.match(/\.(jpg|png|JPG|PNG|webp|JPEG|jpeg)$/))
-//       return cb(new Error("This is not a correct format of the file"));
-//     cb(undefined, true);
-//   },
-// });
+
 
 router
   .get("/", productController.getAllProducts)
