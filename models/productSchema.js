@@ -4,16 +4,25 @@ const productSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: (true, "A product must have a name"),
+      required: [true, "A product must have a name"],
       trim: true,
+      maxlength: [40, "A product name must have less than 40 characters"],
+      minlength: [6, "A product name must have more than 6 characters"],
     },
     originalPrice: {
       type: Number,
-      required: (true, "A product must have originalPrice"),
+      required: [true, "A product must have originalPrice"],
     },
-    originalPrice: {
+    discountedPrice: {
       type: Number,
-      required: (true, "A product must have originalPrice"),
+      required: [true, "A product must have discountedPrice"],
+      validate:{
+        validator:function(value) {
+          // This only ppoints while creating NEW doc and not updating
+          return value<this.price;
+        },
+        message: "Discount price {{VALUE}} must be less than  regular price"
+      }
     },
     inStock: {
       type: Boolean,
@@ -21,17 +30,17 @@ const productSchema = new mongoose.Schema(
     },
     description: {
       type: String,
-      required: (true, "A product must have description"),
+      required: [true, "A product must have description"],
       trim: true,
     },
     size: {
       type: String,
-      required: (true, "A product must have size"),
+      required: [true, "A product must have size"],
       trim: true,
     },
     color: {
       type: String,
-      required: (true, "A product must have color"),
+      required: [true, "A product must have color"],
       trim: true,
     },
     brand: {
@@ -40,12 +49,12 @@ const productSchema = new mongoose.Schema(
     },
     occasion: {
       type: String,
-      required: (true, "A product must have occasion"),
+      required: [true, "A product must have occasion"],
       trim: true,
     },
     season: {
       type: String,
-      required: (true, "A product must have season"),
+      required: [true, "A product must have season"],
       trim: true,
     },
     // product_image:{
@@ -54,7 +63,7 @@ const productSchema = new mongoose.Schema(
     // },
     category: {
       type: String,
-      required: (true, "A product must have category"),
+      required: [true, "A product must have category"],
       trim: true,
     },
   },
